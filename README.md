@@ -12,7 +12,11 @@ Online Code Editor is a web-based Judge0 IDE built with React, allowing users to
 - **Input and Output Management**: Manage user input and view detailed output, including memory and time stats.
 - **IDE Layout Toggle**: Switch between vertical and horizontal IDE layouts.
 
-## Installation
+## Getting Started
+
+After following the installation steps, open your browser and navigate to `http://localhost:3000`. You can start writing and running code right away. Choose a programming language, write your code in the editor, and click the "Run" button or press `F9` to see the output.
+
+### Installation
 
 1. Clone the repository:
 
@@ -27,7 +31,9 @@ Online Code Editor is a web-based Judge0 IDE built with React, allowing users to
     npm install
     ```
 
-3. Create a .env file in the root directory with the following variables:
+3. Register on <a href="https://rapidapi.com/judge0-official/api/judge0-ce/pricing" target="__blank">RapidAPI</a> and get your API keys.
+
+4. Create a .env file in the root directory with the following variables:
 
     ```bash
     REACT_APP_API_URL=https://your-api-url.com/compile
@@ -35,9 +41,15 @@ Online Code Editor is a web-based Judge0 IDE built with React, allowing users to
     REACT_APP_API_KEY=your-api-key
     ```
 
-4. Start the development server:
+5. Start the development server:
 
     ```bash
     npm start
     ```
+
+## Acknowledgments
+
+- [Judge0 API](https://judge0.com) for the execution backend.
+- [Monaco Editor](https://microsoft.github.io/monaco-editor/) for the code editor.
+
    
