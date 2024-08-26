@@ -1,7 +1,7 @@
 # Online-Code-Editor
 Online Code Editor is a web-based Judge0 IDE built with React, allowing users to write, run, and test code in multiple programming languages directly in their browser. It features customizable themes, file management, and a user-friendly interface.
 
-![App](https://github.com/user-attachments/assets/aa87816a-311e-4a57-ba7d-a3643403b340)
+![code-editor](https://github.com/user-attachments/assets/4d7c33b9-2c37-4d05-9b67-973cda218f51)
 
 ## Features
 - **Code Editor**: Powered by Monaco Editor with customizable themes.
