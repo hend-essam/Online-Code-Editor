@@ -4,13 +4,18 @@ An interactive, full-featured online code editor built with the MERN stack. This
 
 ## Table of Contents
 
+- [Application Screenshot](#application-screenshots)
 - [Features](#features)
 - [Tech Stack](#tech-stack)
 - [Installation](#installation)
 - [Usage](#usage)
 - [File Structure](#file-structure)
-- [Contributing](#contributing)
-- [License](#license)
+
+## Application Screenshots
+![Code Editor](https://github.com/user-attachments/assets/0bf99c3d-e055-43bb-a850-cb4971623f01)
+![Folders and Files](https://github.com/user-attachments/assets/29f5a4a5-964b-49fc-920c-55ac6e3a98d8)
+![Sign In form](https://github.com/user-attachments/assets/36979076-b626-4889-ae52-955f65df10ef)
+
 
 ## Features
 
