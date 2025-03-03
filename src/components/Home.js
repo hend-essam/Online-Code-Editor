@@ -13,6 +13,8 @@ import DarkTheme from "./darkMode";
 import RunBtn from "./runButton";
 import DownloadCode from "./downloadCode";
 import IdeMode from "./ideMode";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function Home() {
   const [theme, setTheme] = useState("brilliance-black");
@@ -84,13 +86,13 @@ function Home() {
     setProcessing(true);
     setActivePart("output");
     setOutputDetails("");
+
     const options = {
       method: "POST",
       url: process.env.REACT_APP_API_URL,
       params: { base64_encoded: "true", fields: "*" },
       headers: {
         "content-type": "application/json",
-        "Content-Type": "application/json",
         "X-RapidAPI-Host": process.env.REACT_APP_API_HOST,
         "X-RapidAPI-Key": process.env.REACT_APP_API_KEY,
       },
@@ -103,18 +105,27 @@ function Home() {
 
     axios
       .request(options)
-      .then(function (response) {
+      .then((response) => {
         const token = response.data.token;
         checkStatus(token);
       })
       .catch((err) => {
         let error = err.response ? err.response.data : err;
-        // get error status
-        let status = err.response.status;
-        console.log("status", status);
+        let status = err.response?.status;
+
         if (status === 429) {
-          console.log("many requests", status);
+          console.log("Too many requests:", status);
+          toast.error(
+            "You have reached the maximum quota. Please try again later.",
+            {
+              position: "top-right",
+              autoClose: 5000,
+            }
+          );
+        } else {
+          console.error("Error:", error);
         }
+
         setProcessing(false);
         console.log("catch block...", error);
       });
