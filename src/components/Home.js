@@ -170,24 +170,26 @@ function Home() {
       <div className="flex_column">
         <div className="header">
           <div className="header_part1">
-            <SelectFile
-              selectedFile={selectedFile}
-              setSelectedFile={setSelectedFile}
-              setCode={setCode}
-            />
+            <div className="icons">
+              <SelectFile
+                selectedFile={selectedFile}
+                setSelectedFile={setSelectedFile}
+                setCode={setCode}
+              />
+              <DownloadCode code={code} language={language?.extension} />
+            </div>
+            <div className="selects">
+              <SelectLanguage
+                onSelectChange={onSelectChange}
+                darkTheme={darkTheme}
+              />
 
-            <DownloadCode code={code} language={language?.extension} />
-
-            <SelectLanguage
-              onSelectChange={onSelectChange}
-              darkTheme={darkTheme}
-            />
-
-            <SelectTheme
-              changeTheme={changeTheme}
-              theme={theme}
-              darkTheme={darkTheme}
-            />
+              <SelectTheme
+                changeTheme={changeTheme}
+                theme={theme}
+                darkTheme={darkTheme}
+              />
+            </div>
           </div>
           <div className="header-part2">
             <RunBtn
