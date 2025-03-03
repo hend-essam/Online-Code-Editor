@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Online-Code-Editor/static/css/main.26226c3e.css",
-    "main.js": "/Online-Code-Editor/static/js/main.7020cba3.js",
+    "main.js": "/Online-Code-Editor/static/js/main.ba34b70e.js",
     "static/js/266.1769237a.chunk.js": "/Online-Code-Editor/static/js/266.1769237a.chunk.js",
     "static/js/4450.0e59d6d3.chunk.js": "/Online-Code-Editor/static/js/4450.0e59d6d3.chunk.js",
     "static/js/8849.a727c974.chunk.js": "/Online-Code-Editor/static/js/8849.a727c974.chunk.js",
@@ -58,10 +58,10 @@
     "static/js/5729.aed97c65.chunk.js": "/Online-Code-Editor/static/js/5729.aed97c65.chunk.js",
     "index.html": "/Online-Code-Editor/index.html",
     "main.26226c3e.css.map": "/Online-Code-Editor/static/css/main.26226c3e.css.map",
-    "main.7020cba3.js.map": "/Online-Code-Editor/static/js/main.7020cba3.js.map"
+    "main.ba34b70e.js.map": "/Online-Code-Editor/static/js/main.ba34b70e.js.map"
   },
   "entrypoints": [
     "static/css/main.26226c3e.css",
-    "static/js/main.7020cba3.js"
+    "static/js/main.ba34b70e.js"
   ]
 }
