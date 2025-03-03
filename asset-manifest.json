@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Online-Code-Editor/static/css/main.8f82ae4d.css",
-    "main.js": "/Online-Code-Editor/static/js/main.3aef48ff.js",
+    "main.css": "/Online-Code-Editor/static/css/main.ddf7fea9.css",
+    "main.js": "/Online-Code-Editor/static/js/main.a8b1f247.js",
     "static/js/266.1769237a.chunk.js": "/Online-Code-Editor/static/js/266.1769237a.chunk.js",
     "static/js/4450.0e59d6d3.chunk.js": "/Online-Code-Editor/static/js/4450.0e59d6d3.chunk.js",
     "static/js/8849.a727c974.chunk.js": "/Online-Code-Editor/static/js/8849.a727c974.chunk.js",
@@ -57,11 +57,11 @@
     "static/js/9633.0dd7d50f.chunk.js": "/Online-Code-Editor/static/js/9633.0dd7d50f.chunk.js",
     "static/js/5729.aed97c65.chunk.js": "/Online-Code-Editor/static/js/5729.aed97c65.chunk.js",
     "index.html": "/Online-Code-Editor/index.html",
-    "main.8f82ae4d.css.map": "/Online-Code-Editor/static/css/main.8f82ae4d.css.map",
-    "main.3aef48ff.js.map": "/Online-Code-Editor/static/js/main.3aef48ff.js.map"
+    "main.ddf7fea9.css.map": "/Online-Code-Editor/static/css/main.ddf7fea9.css.map",
+    "main.a8b1f247.js.map": "/Online-Code-Editor/static/js/main.a8b1f247.js.map"
   },
   "entrypoints": [
-    "static/css/main.8f82ae4d.css",
-    "static/js/main.3aef48ff.js"
+    "static/css/main.ddf7fea9.css",
+    "static/js/main.a8b1f247.js"
   ]
 }
