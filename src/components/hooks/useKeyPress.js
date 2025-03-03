@@ -1,29 +1,35 @@
-import React, { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 
-const useKeyPress = function (targetKey) {
+const useKeyPress = (targetKey) => {
   const [keyPressed, setKeyPressed] = useState(false);
+  const isKeyHeld = useRef(false);
 
-  function downHandler({ key }) {
-    if (key === targetKey) {
-      setKeyPressed(true);
-    }
-  }
-
-  const upHandler = ({ key }) => {
-    if (key === targetKey) {
-      setKeyPressed(false);
+  const downHandler = (event) => {
+    if (event.code === targetKey || event.keyCode === 170) {
+      event.preventDefault();
+      if (!isKeyHeld.current) {
+        setKeyPressed(true);
+        isKeyHeld.current = true;
+      }
     }
   };
 
-  React.useEffect(() => {
-    document.addEventListener("keydown", downHandler);
-    document.addEventListener("keyup", upHandler);
+  const upHandler = (event) => {
+    if (event.code === targetKey || event.keyCode === 170) {
+      setKeyPressed(false);
+      isKeyHeld.current = false;
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", downHandler);
+    window.addEventListener("keyup", upHandler);
 
     return () => {
-      document.removeEventListener("keydown", downHandler);
-      document.removeEventListener("keyup", upHandler);
+      window.removeEventListener("keydown", downHandler);
+      window.removeEventListener("keyup", upHandler);
     };
-  });
+  }, [targetKey]);
 
   return keyPressed;
 };

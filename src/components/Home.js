@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import CodeEditor from "./CodeEditor";
 import SelectTheme from "./theme/SelectTheme";
 import { Theme } from "./theme/Themes";
@@ -80,7 +80,7 @@ function Home() {
   };
   //////////////////////////////////////
 
-  const handleCompile = () => {
+  const handleCompile = useCallback(() => {
     setProcessing(true);
     setActivePart("output");
     setOutputDetails("");
@@ -118,7 +118,7 @@ function Home() {
         setProcessing(false);
         console.log("catch block...", error);
       });
-  };
+  }, [code, language.id, userInput]);
 
   const checkStatus = async (token) => {
     const options = {
