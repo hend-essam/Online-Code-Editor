@@ -6,13 +6,20 @@ function SignUp({setChangeSginIn}){
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
 
    const handleSubmit = async (e) => {
     e.preventDefault();
-    const params = { firstName, lastName, email, password };
-    const res = await signUp(params);
-    if (res && res.data) {
-      console.log(res.data);
+    setError('');
+
+    if (!firstName.trim() || !lastName.trim()) return setError('First and last name are required.');
+    if (!email.includes('@')) return setError('Email must be valid.');
+    if (password.length < 4 || password.length > 20) return setError('Password must be between 4 and 20 characters.');
+
+    const res = await signUp({ firstName, lastName, email, password });
+    if (res?.error) {
+      setError(res.error);
+      return;
     }
     window.location.reload(false);
   };
@@ -40,6 +47,7 @@ function SignUp({setChangeSginIn}){
           <legend>Password</legend>
           <input id="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
         </fieldset>
+        {error && <p style={{ color: 'red', margin: '8px 0' }}>{error}</p>}
         <a href="#" onClick={handleSubmit}>
           Submit
         </a>

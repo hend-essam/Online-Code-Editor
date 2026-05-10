@@ -1,14 +1,16 @@
 import express, { Request, Response } from "express";
 import { requireAuth } from "../common/src/middlewares/require-auth";
-import { User, Folder, File } from "../models/user";
+import { currentUser } from "../middlewares/current-user";
+import { User } from "../models/user";
 
 const router = express.Router();
 
 router.get(
   "/api/files/:fileName",
+  currentUser,
   requireAuth,
   async (req: Request, res: Response) => {
-    const userId = req.currentUser!.id; // Assuming you have middleware to set the currentUser property on the request object
+    const userId = req.currentUser!.id;
     const fileName = req.params.fileName;
 
     try {
@@ -19,12 +21,9 @@ router.get(
       }
 
       const file = user.folders?.reduce(
-        (foundFile: File | null, folder: any) => {
-          if (foundFile) {
-            return foundFile;
-          }
-
-          return folder.files.find((f: File) => f.name === fileName) || null;
+        (foundFile: any, folder: any) => {
+          if (foundFile) return foundFile;
+          return folder.files.find((f: any) => f.name === fileName) || null;
         },
         null
       );

@@ -26,7 +26,7 @@ router.get(
         return res.status(404).json({ message: "No folders found" });
       }
 
-      let firstFile: File | null = null;
+      let firstFile: any = null;
 
       for (const folder of folders) {
         if (folder.files && folder.files.length > 0) {

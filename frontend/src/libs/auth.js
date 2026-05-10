@@ -56,6 +56,52 @@ export async function checkAuth() {
   }
   return res.data.currentUser;
 }
+export async function getFileById(fileId) {
+  const res = await axios
+    .get(`${api_url}/files/id/${fileId}`, { withCredentials: true })
+    .catch(catchAxiosError);
+  if (res.error) return res;
+  else if (!res.data) return "Something went wrong!";
+  return res.data;
+}
+
+export async function saveFileById(fileId, fileContent) {
+  const res = await axios
+    .put(`${api_url}/files/${fileId}/content`, { fileContent }, { withCredentials: true })
+    .catch(catchAxiosError);
+  if (res.error) return res;
+  else if (!res.data) return "Something went wrong!";
+  return res.data;
+}
+
+export async function editFileById(fileId, newFileName) {
+  const res = await axios
+    .put(`${api_url}/files/edit/${fileId}`, { newFileName }, { withCredentials: true })
+    .catch(catchAxiosError);
+  if (res.error) return res;
+  else if (!res.data) return "Something went wrong!";
+  return res.data;
+}
+
+export async function deleteFileById(fileId) {
+  const res = await axios
+    .delete(`${api_url}/files/folder/${fileId}`, { withCredentials: true })
+    .catch(catchAxiosError);
+  if (res.error) return res;
+  else if (!res.data) return "Something went wrong!";
+  return res.data;
+}
+
+export async function createFileInFolder(folderId, params) {
+  const res = await axios
+    .post(`${api_url}/files/folder/${folderId}`, params, { withCredentials: true })
+    .catch(catchAxiosError);
+
+  if (res.error) return res;
+  else if (!res.data) return "Something went wrong!";
+  return res.data;
+}
+
 export async function saveFile(params) {
   const res = await axios
     .post(`${api_url}/files`, params, { withCredentials: true })

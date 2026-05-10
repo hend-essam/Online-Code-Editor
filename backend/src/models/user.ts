@@ -41,31 +41,21 @@ interface FolderDoc extends Document {
 
 interface FileAttrs {
   name: string;
-  content: string;
-}
-interface File {
-  lastModified: Date;
-  webkitRelativePath: string;
-  size: number;
-  type: string;
-  name: string;
-  content: string;
-  // Add other properties specific to the File model
+  content?: string;
 }
 
-interface FileDoc extends File, Document {}
+export interface FileDoc extends Document {
+  name: string;
+  content: string;
+}
+
 interface FileModel extends mongoose.Model<FileDoc> {
   build(attrs: FileAttrs): FileDoc;
 }
 
-// interface FileDoc extends Document {
-//   name: string;
-//   content: string;
-// }
-
 const fileSchema = new Schema<FileDoc>({
   name: { type: String, required: true },
-  content: { type: String, required: true },
+  content: { type: String, default: "" },
 });
 
 const folderSchema = new Schema<FolderDoc>(

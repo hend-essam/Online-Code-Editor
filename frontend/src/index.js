@@ -3,6 +3,18 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 /* import reportWebVitals from './reportWebVitals'; */
 
+const _error = window.onerror;
+window.onerror = (message, ...args) => {
+  if (typeof message === 'string' && message.includes('ResizeObserver loop')) return true;
+  return _error?.(...args);
+};
+window.addEventListener('error', (e) => {
+  if (e.message?.includes('ResizeObserver loop')) {
+    e.stopImmediatePropagation();
+    e.preventDefault();
+  }
+}, true);
+
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>

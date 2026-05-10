@@ -4,13 +4,15 @@ import { signIn } from "../../libs/auth";
 function SignIn({ setChangeSginIn }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const params = { email, password };
-    const res = await signIn(params);
-    if (res && res.data) {
-      console.log(res.data);
+    setError("");
+    const res = await signIn({ email, password });
+    if (res?.error) {
+      setError(res.error);
+      return;
     }
     window.location.reload(false);
   };
@@ -38,6 +40,7 @@ function SignIn({ setChangeSginIn }) {
             onChange={(e) => setPassword(e.target.value)}
           />
         </fieldset>
+        {error && <p style={{ color: "red", margin: "8px 0" }}>{error}</p>}
         <a href="#" onClick={handleSubmit}>
           Submit
         </a>

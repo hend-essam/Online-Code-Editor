@@ -15,23 +15,20 @@ router.get(
     try {
       const user = await User.findById(userId).populate({
         path: "folders",
-        populate: {
-          path: "files",
-        },
+        populate: [
+          { path: "files" },
+          {
+            path: "folders",
+            populate: { path: "files" },
+          },
+        ],
       });
 
       if (!user) {
         return res.status(404).json({ message: "User not found" });
       }
 
-      const populatedFolders = await Folder.populate(user.folders, {
-        path: "folders",
-        populate: {
-          path: "files",
-        },
-      });
-
-      res.json(populatedFolders);
+      res.json(user.folders);
     } catch (err) {
       console.error(err);
       res.status(500).json({ message: "Server error" });

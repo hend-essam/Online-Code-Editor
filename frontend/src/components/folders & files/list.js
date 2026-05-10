@@ -17,10 +17,12 @@ function List({
   setFiles,
   createFile,
   handleFileNames,
+  setActiveFileId,
 }) {
   const [folders, setFolders] = useState("Root Folder");
   const [nestedFolders, setNestedFolders] = useState([]);
   const [nestedFolderName, setNestedFolderName] = useState("");
+  const [newFileName, setNewFileName] = useState("");
   const [openCreateFile, setOpenCreateFile] = useState(false);
   const [openCreateFolder, setOpenCreateFolder] = useState(false);
   const [fileName, setFileName] = useState("");
@@ -33,8 +35,8 @@ function List({
       console.log(folders);
       if (folders[0]) {
         setFolders(folders[0].name);
-        setNestedFolders(folders[0].folders);
-        setFiles(folders[0].files);
+        setNestedFolders(folders[0].folders || []);
+        setFiles(folders[0].files || []);
       }
     };
     fetchFolders();
@@ -42,7 +44,7 @@ function List({
 
   const handleShowFile = (content, name) => {
     fetchCode(content);
-    handleFileNames(name);
+    handleFileNames(name, null);
   };
 
   const handleEditClick = (file) => {
@@ -72,11 +74,11 @@ function List({
   };
 
   const handleCreateFolder = async () => {
+    if (!nestedFolderName.trim()) return;
     const res = await createFolder({ name: nestedFolderName });
-    console.log(nestedFolders);
-    console.log(res);
     setNestedFolders([...nestedFolders, res]);
-    console.log(nestedFolders);
+    setNestedFolderName("");
+    setOpenCreateFolder(false);
   };
 
   return (
@@ -133,12 +135,12 @@ function List({
                 <>
                   <input
                     type="text"
-                    value={fileName}
-                    onChange={(e) => setFileName(e.target.value)}
+                    value={newFileName}
+                    onChange={(e) => setNewFileName(e.target.value)}
                   />
                   <div className="create-file-btn-icon">
                     <div className="create-file-btn">
-                      <button onClick={() => createFile(fileName)}>Save</button>
+                      <button onClick={() => { createFile(newFileName); setNewFileName(""); setOpenCreateFile(false); }}>Save</button>
                       <button onClick={() => setOpenCreateFile(false)}>
                         Cancel
                       </button>
@@ -150,7 +152,9 @@ function List({
 
             <DropdownFolder
               nestedFolders={nestedFolders}
-              nestedFolderName={nestedFolderName}
+              fetchCode={fetchCode}
+              handleFileNames={handleFileNames}
+              setActiveFileId={setActiveFileId}
             />
             {files.map((file) => (
               <div

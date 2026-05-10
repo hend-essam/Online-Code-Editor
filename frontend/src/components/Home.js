@@ -9,7 +9,7 @@ import axios from "axios";
 import SignIn_SignUp from "./signIn-signUp/main";
 import List from "./folders & files/list";
 import FileName from "./folders & files/fileName";
-import { getFile, saveFile } from "../libs/auth";
+import { getFile, saveFile, saveFileById } from "../libs/auth";
 import Header from "./header/header";
 
 function Home() {
@@ -31,13 +31,15 @@ function Home() {
   const [isCodeEdited, setIsCodeEdited] = useState(false);
   const [fileName, setFileName] = useState("untiteld.js");
   const [files, setFiles] = useState([]);
+  const [activeFileId, setActiveFileId] = useState(null);
 
   useEffect(() => {
     setExample(example)
   },[example, code])
 
-  const handleFileNames = (name) => {
+  const handleFileNames = (name, fileId = null) => {
     setFileName(name);
+    setActiveFileId(fileId);
   };
 
   const handleInputChange = (val) => {
@@ -204,7 +206,11 @@ function Home() {
   };
 
   const handleSave = async () => {
-    await saveFile({ fileName, fileContent: code });
+    if (activeFileId) {
+      await saveFileById(activeFileId, code);
+    } else {
+      await saveFile({ fileName, fileContent: code });
+    }
     const existingFile = files.find((file) => file.name === fileName);
     if (existingFile) {
       const updatedFiles = files.filter((file) => file.name !== fileName);
@@ -307,6 +313,7 @@ function Home() {
       fileName={fileName}
       handleInputChange={handleInputChange}
       handleFileNames={handleFileNames}
+      setActiveFileId={setActiveFileId}
     />
 
     <SignIn_SignUp 

@@ -44,4 +44,42 @@ router.put(
     }
   }
 );
+router.put(
+  "/api/files/edit/:fileId",
+  currentUser,
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const { fileId } = req.params;
+    const { newFileName } = req.body;
+    try {
+      const file = await File.findById(fileId);
+      if (!file) return res.status(404).json({ message: "File not found" });
+      file.name = newFileName;
+      await file.save();
+      res.status(200).json(file);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
+);
+
+router.delete(
+  "/api/files/folder/:fileId",
+  currentUser,
+  requireAuth,
+  async (req: Request, res: Response) => {
+    const { fileId } = req.params;
+    try {
+      const file = await File.findByIdAndDelete(fileId);
+      if (!file) return res.status(404).json({ message: "File not found" });
+      await Folder.updateOne({ files: fileId }, { $pull: { files: fileId } });
+      res.status(200).json({ message: "File deleted successfully" });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: "Server error" });
+    }
+  }
+);
+
 export { router as editFile };
